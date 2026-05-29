@@ -1,0 +1,1593 @@
+22:08:54 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:15:37 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:25:40 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:28:07 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:29:42 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:30:38 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:30:47 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:30:57 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:31:03 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:31:03 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:31:03 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:31:03 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:31:03 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:31:03 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:31:03 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:31:03 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:31:06 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.503s
+22:31:06 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.504s
+22:31:06 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 2.505s (objeto listo; búsqueda embeddeará la query)
+22:31:06 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.089s
+22:31:06 | INFO  | app.rag.service | [RAG] Vector store cargado en 2.595s
+22:31:06 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-1.5-flash
+22:31:06 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.038s
+22:31:06 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.038s
+22:31:06 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:31:06 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:31:06 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.076s
+22:31:06 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:31:06 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:31:06 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:31:06 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:31:06 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:31:06 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.079s | num_docs=3
+22:31:06 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:31:06 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:31:06 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:31:07 | WARNING | app.rag.service | [RAG] Invocación Gemini falló (no reintentable) | intento=1 | 0.743s | Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:31:07 | ERROR | app.rag.rag_chain | Error en cadena RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:31:07 | ERROR | app.main | [/chat] Error tras 3.468s
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\main.py", line 166, in chat
+    out = rag_service.query(payload.question, history=history)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 208, in query
+    out = rag_query(
+          ^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 149, in query
+    raise RuntimeError(f"Fallo al ejecutar RAG: {exc}") from exc
+RuntimeError: Fallo al ejecutar RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:31:18 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:31:18 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 64
+22:31:18 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 120
+22:31:18 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 3
+22:31:18 | INFO  | app.rag.chunking | Chunking: total=139 descartados=2 promedio_tokens_estimados=181.1
+22:31:18 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:31:18 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:31:18 | INFO  | app.rag.service | Indexando 139 chunks en Chroma…
+22:31:21 | INFO  | app.main | [/ingest] OK en 3.466s | resultado={'documents_processed': 3, 'chunks_indexed': 139, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:31:27 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:31:27 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:31:27 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:31:27 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:31:27 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+22:31:27 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.013s
+22:31:27 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.014s
+22:31:27 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+22:31:27 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:31:27 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:31:27 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.018s
+22:31:27 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:31:27 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:31:27 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:31:27 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:31:27 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:31:27 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.022s | num_docs=3
+22:31:27 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:31:27 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:31:27 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:31:28 | WARNING | app.rag.service | [RAG] Invocación Gemini falló (no reintentable) | intento=1 | 0.677s | Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:31:28 | ERROR | app.rag.rag_chain | Error en cadena RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:31:28 | ERROR | app.main | [/chat] Error tras 0.721s
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\main.py", line 166, in chat
+    out = rag_service.query(payload.question, history=history)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 208, in query
+    out = rag_query(
+          ^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 149, in query
+    raise RuntimeError(f"Fallo al ejecutar RAG: {exc}") from exc
+RuntimeError: Fallo al ejecutar RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:32:20 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:32:51 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:32:51 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:32:51 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:32:51 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:32:51 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:32:51 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:32:51 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:32:51 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:32:54 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.846s
+22:32:54 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.848s
+22:32:54 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 2.849s (objeto listo; búsqueda embeddeará la query)
+22:32:54 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.147s
+22:32:54 | INFO  | app.rag.service | [RAG] Vector store cargado en 2.998s
+22:32:54 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.0-flash
+22:32:54 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.055s
+22:32:54 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.056s
+22:32:54 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:32:54 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:32:54 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.137s
+22:32:54 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:32:54 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:32:54 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:32:54 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:32:54 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:32:54 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.147s | num_docs=3
+22:32:54 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:32:54 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:32:54 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:32:55 | WARNING | app.rag.service | [RAG] Invocación Gemini falló (no reintentable) | intento=1 | 0.770s | Error calling model 'gemini-2.0-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+22:32:55 | ERROR | app.rag.rag_chain | Error en cadena RAG: Error calling model 'gemini-2.0-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-2.0-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+22:32:55 | ERROR | app.main | [/chat] Error tras 3.995s
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-2.0-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\main.py", line 166, in chat
+    out = rag_service.query(payload.question, history=history)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 208, in query
+    out = rag_query(
+          ^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 149, in query
+    raise RuntimeError(f"Fallo al ejecutar RAG: {exc}") from exc
+RuntimeError: Fallo al ejecutar RAG: Error calling model 'gemini-2.0-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.0-flash is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+22:35:23 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:35:27 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:35:27 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:35:27 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:35:27 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:35:27 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:35:27 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:35:27 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:35:28 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:35:30 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.576s
+22:35:30 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.578s
+22:35:30 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 2.580s (objeto listo; búsqueda embeddeará la query)
+22:35:30 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.125s
+22:35:30 | INFO  | app.rag.service | [RAG] Vector store cargado en 2.706s
+22:35:30 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.0-flash
+22:35:30 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.044s
+22:35:30 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.045s
+22:35:30 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:35:30 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:35:30 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.120s
+22:35:30 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:35:30 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:35:30 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:35:30 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:35:30 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:35:30 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.124s | num_docs=3
+22:35:30 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:35:30 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:35:30 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:35:31 | WARNING | app.rag.service | [RAG] Gemini 429/rate limit | intento 1/2 | espera 2.4s | error=Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 28.131078892s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '28s'}]}}
+22:35:33 | ERROR | app.rag.service | [RAG] Gemini rate limit: agotados 2 intentos | último error: Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+22:35:33 | ERROR | app.rag.rag_chain | Error en cadena RAG: Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 129, in _with_retry
+    raise last
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+22:35:33 | ERROR | app.main | [/chat] Error tras 5.690s
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 129, in _with_retry
+    raise last
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\main.py", line 166, in chat
+    out = rag_service.query(payload.question, history=history)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 208, in query
+    out = rag_query(
+          ^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 149, in query
+    raise RuntimeError(f"Fallo al ejecutar RAG: {exc}") from exc
+RuntimeError: Fallo al ejecutar RAG: Error calling model 'gemini-2.0-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 25.610971044s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}
+22:36:26 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:36:34 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:36:34 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:36:34 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:36:34 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:36:34 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:36:34 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:36:34 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:36:35 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:36:37 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.440s
+22:36:37 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.443s
+22:36:37 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 2.443s (objeto listo; búsqueda embeddeará la query)
+22:36:37 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.100s
+22:36:37 | INFO  | app.rag.service | [RAG] Vector store cargado en 2.544s
+22:36:37 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-1.5-flash
+22:36:37 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.038s
+22:36:37 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.039s
+22:36:37 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:36:37 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:36:37 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.108s
+22:36:37 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:36:37 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:36:37 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:36:37 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:36:37 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:36:37 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.113s | num_docs=3
+22:36:37 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:36:37 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:36:37 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:36:37 | WARNING | app.rag.service | [RAG] Invocación Gemini falló (no reintentable) | intento=1 | 0.358s | Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:36:37 | ERROR | app.rag.rag_chain | Error en cadena RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:36:37 | ERROR | app.main | [/chat] Error tras 3.067s
+Traceback (most recent call last):
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3166, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 6331, in generate_content
+    response = self._generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\models.py", line 4767, in _generate_content
+    response = self._api_client.request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1605, in request
+    response = self._request(http_request, http_options, stream=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1396, in _request
+    return retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\_api_client.py", line 1375, in _request_once
+    errors.APIError.raise_for_response(response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 122, in query
+    raw = with_retry(
+          ^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 90, in _with_retry
+    out = fn()
+          ^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 123, in <lambda>
+    lambda: chain.invoke({"context": context, "question": question, "history_block": history_block})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3335, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2644, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 474, in invoke
+    self.generate_prompt(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1823, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1630, in generate
+    self._generate_with_cache(
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1970, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3170, in _generate
+    _handle_client_error(e, request)
+  File "c:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\.venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 169, in _handle_client_error
+    raise ChatGoogleGenerativeAIError(msg) from e
+langchain_google_genai.chat_models.ChatGoogleGenerativeAIError: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\main.py", line 166, in chat
+    out = rag_service.query(payload.question, history=history)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\service.py", line 208, in query
+    out = rag_query(
+          ^^^^^^^^^^
+  File "C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\app\rag\rag_chain.py", line 149, in query
+    raise RuntimeError(f"Fallo al ejecutar RAG: {exc}") from exc
+RuntimeError: Fallo al ejecutar RAG: Error calling model 'gemini-1.5-flash' (NOT_FOUND): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+22:39:17 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:39:54 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:39:54 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:39:54 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:39:54 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:39:54 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:39:54 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:39:54 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:39:54 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:39:57 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.616s
+22:39:57 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.618s
+22:39:57 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 2.618s (objeto listo; búsqueda embeddeará la query)
+22:39:57 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.143s
+22:39:57 | INFO  | app.rag.service | [RAG] Vector store cargado en 2.763s
+22:39:57 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+22:39:57 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.051s
+22:39:57 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.052s
+22:39:57 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:39:57 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:39:57 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.106s
+22:39:57 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:39:57 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1907 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:39:57 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5470 chars=689 source=Decreto_616_de_2006.pdf page=2 | los hatos deben registrarse en la oﬁcina local del ICA o quien este delegue.
+Artículo 5º. Requisitos que deben cumplir l…
+22:39:57 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5034 chars=672 source=Decreto_616_de_2006.pdf page=16 | de la Protección Social y las que la modiﬁquen, adicionen o sustituyan, debe indicarse en idioma español, el país de ori…
+22:39:57 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5034 chars=546 source=Decreto_616_de_2006.pdf page=6 | 8
+1. La adición de lactosueros a la leche en todas las etapas de la cadena productiva.
+2. Modiﬁcado por el art. 2, Decre…
+22:39:57 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.112s | num_docs=3
+22:39:57 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2041
+22:39:57 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:39:57 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:40:00 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.856s
+22:40:00 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.857s | len_respuesta_raw=374
+22:40:00 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.973s | query() total=5.790s
+22:40:00 | INFO  | app.main | [/chat] RAG completado en 5.791s (total: 5.792s)
+22:40:00 | INFO  | app.main | [/chat] Respuesta serializada | len=374 | fuentes=3 | total=5.792s
+22:44:47 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:44:47 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 64
+22:44:47 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 120
+22:44:47 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 3
+22:44:47 | INFO  | app.rag.chunking | Chunking: total=139 descartados=2 promedio_tokens_estimados=181.1
+22:44:47 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:44:47 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:44:47 | INFO  | app.rag.service | Indexando 139 chunks en Chroma…
+22:44:52 | INFO  | app.main | [/ingest] OK en 5.797s | resultado={'documents_processed': 3, 'chunks_indexed': 139, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:47:15 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:47:15 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 64
+22:47:15 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 120
+22:47:15 | INFO  | app.rag.preprocess | Líneas repetitivas detectadas (posibles headers/footers): 3
+22:47:15 | INFO  | app.rag.chunking | Chunking: total=139 descartados=2 promedio_tokens_estimados=181.1
+22:47:15 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:47:15 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:47:15 | INFO  | app.rag.service | Indexando 139 chunks en Chroma…
+22:47:21 | INFO  | app.main | [/ingest] OK en 5.924s | resultado={'documents_processed': 3, 'chunks_indexed': 139, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:48:00 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:53:47 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:53:47 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:53:47 | INFO  | app.rag.chunking | Chunking: total=159 descartados=5 promedio_tokens_estimados=150.0
+22:53:47 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:53:48 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:53:48 | INFO  | app.rag.service | Indexando 159 chunks en Chroma…
+22:53:48 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:53:48 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:53:48 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:53:48 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:53:50 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.512s
+22:53:50 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.514s
+22:53:55 | INFO  | app.main | [/ingest] OK en 7.222s | resultado={'documents_processed': 1, 'chunks_indexed': 159, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:54:02 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:54:02 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:54:02 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:54:02 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:54:02 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+22:54:02 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.023s
+22:54:02 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.024s
+22:54:02 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+22:54:02 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.028s
+22:54:02 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.029s
+22:54:02 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:54:02 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:54:02 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.025s
+22:54:02 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:54:02 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1449 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:54:02 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5445 chars=612 source=Decreto_616_de_2006.md page= | locales de los hatos deben garantizar el mínimo riesgo de contaminación de la leche cruda tanto de origen intrínseco (an…
+22:54:02 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5383 chars=190 source=Decreto_616_de_2006.md page= | ### Capítulo Vii
+
+Del proceso de higienización
+
+#### Artículo 27. Equipo mínimo. Las plantas para el proceso de higieniz…
+22:54:02 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5239 chars=647 source=Decreto_616_de_2006.md page= | hayan sido previamente inscritos ante el ICA o la procedente de plantas para enfriamiento. Se debe tener en la planta de…
+22:54:02 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.030s | num_docs=3
+22:54:02 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1576
+22:54:02 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:54:02 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:54:05 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.124s
+22:54:05 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.125s | len_respuesta_raw=131
+22:54:05 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.157s | query() total=3.212s
+22:54:05 | INFO  | app.main | [/chat] RAG completado en 3.212s (total: 3.213s)
+22:54:05 | INFO  | app.main | [/chat] Respuesta serializada | len=131 | fuentes=3 | total=3.214s
+22:54:53 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:54:53 | INFO  | app.rag.chunking | Chunking: total=159 descartados=5 promedio_tokens_estimados=150.0
+22:54:53 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:54:53 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:54:53 | INFO  | app.rag.service | Indexando 159 chunks en Chroma…
+22:54:59 | INFO  | app.main | [/ingest] OK en 5.802s | resultado={'documents_processed': 1, 'chunks_indexed': 159, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:55:03 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:55:03 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:55:03 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:55:03 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:55:03 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+22:55:03 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.025s
+22:55:03 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.026s
+22:55:03 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+22:55:03 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:55:03 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:55:03 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.022s
+22:55:03 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:55:03 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1449 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:55:03 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5445 chars=612 source=Decreto_616_de_2006.md page= | locales de los hatos deben garantizar el mínimo riesgo de contaminación de la leche cruda tanto de origen intrínseco (an…
+22:55:03 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5383 chars=190 source=Decreto_616_de_2006.md page= | ### Capítulo Vii
+
+Del proceso de higienización
+
+#### Artículo 27. Equipo mínimo. Las plantas para el proceso de higieniz…
+22:55:03 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5239 chars=647 source=Decreto_616_de_2006.md page= | hayan sido previamente inscritos ante el ICA o la procedente de plantas para enfriamiento. Se debe tener en la planta de…
+22:55:03 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.026s | num_docs=3
+22:55:03 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1576
+22:55:03 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:55:03 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=True
+22:55:06 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.030s
+22:55:06 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.031s | len_respuesta_raw=131
+22:55:06 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.061s | query() total=3.088s
+22:55:06 | INFO  | app.main | [/chat] RAG completado en 3.089s (total: 3.091s)
+22:55:06 | INFO  | app.main | [/chat] Respuesta serializada | len=131 | fuentes=3 | total=3.091s
+22:56:53 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+22:57:02 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:57:02 | INFO  | app.rag.chunking | Chunking: total=159 descartados=5 promedio_tokens_estimados=150.0
+22:57:02 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:57:02 | INFO  | app.rag.service | Indexando 159 chunks en Chroma…
+22:57:02 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+22:57:02 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+22:57:02 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+22:57:03 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22:57:05 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.535s
+22:57:05 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.537s
+22:57:09 | INFO  | app.main | [/ingest] OK en 7.113s | resultado={'documents_processed': 1, 'chunks_indexed': 159, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:57:25 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:57:25 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:57:25 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:57:25 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:57:25 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+22:57:25 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.024s
+22:57:25 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.025s
+22:57:25 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+22:57:25 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.040s
+22:57:25 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.041s
+22:57:25 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:57:25 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:57:25 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.026s
+22:57:25 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:57:25 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1449 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:57:25 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5445 chars=612 source=Decreto_616_de_2006.md page= | locales de los hatos deben garantizar el mínimo riesgo de contaminación de la leche cruda tanto de origen intrínseco (an…
+22:57:25 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5383 chars=190 source=Decreto_616_de_2006.md page= | ### Capítulo Vii
+
+Del proceso de higienización
+
+#### Artículo 27. Equipo mínimo. Las plantas para el proceso de higieniz…
+22:57:25 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5239 chars=647 source=Decreto_616_de_2006.md page= | hayan sido previamente inscritos ante el ICA o la procedente de plantas para enfriamiento. Se debe tener en la planta de…
+22:57:25 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.030s | num_docs=3
+22:57:25 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1576
+22:57:25 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:57:25 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=False
+22:57:28 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.204s
+22:57:28 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.205s | len_respuesta_raw=131
+22:57:28 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.239s | query() total=2.306s
+22:57:28 | INFO  | app.main | [/chat] RAG completado en 2.306s (total: 2.307s)
+22:57:28 | INFO  | app.main | [/chat] Respuesta serializada | len=131 | fuentes=3 | total=2.308s
+22:58:05 | INFO  | app.main | [/ingest] Inicio de indexación…
+22:58:05 | INFO  | app.rag.chunking | Chunking: total=159 descartados=5 promedio_tokens_estimados=150.1
+22:58:05 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+22:58:05 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+22:58:05 | INFO  | app.rag.service | Indexando 159 chunks en Chroma…
+22:58:10 | INFO  | app.main | [/ingest] OK en 5.741s | resultado={'documents_processed': 1, 'chunks_indexed': 159, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+22:58:13 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=70 | preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:58:13 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=string
+22:58:13 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=70
+22:58:13 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+22:58:13 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+22:58:13 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.021s
+22:58:13 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.023s
+22:58:13 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+22:58:13 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+22:58:13 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=70
+22:58:13 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.027s
+22:58:13 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+22:58:13 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1334 | query_preview='Cuanto es el porcentaje mínimo de grasa que debe tener la leche cruda?'
+22:58:13 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5445 chars=612 source=Decreto_616_de_2006.md page= | locales de los hatos deben garantizar el mínimo riesgo de contaminación de la leche cruda tanto de origen intrínseco (an…
+22:58:13 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5383 chars=190 source=Decreto_616_de_2006.md page= | ### Capítulo Vii
+
+Del proceso de higienización
+
+#### Artículo 27. Equipo mínimo. Las plantas para el proceso de higieniz…
+22:58:13 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5255 chars=532 source=Decreto_616_de_2006.md page= | #### Tabla 1
+
+Características de la leche cruda
+Parámetro/Unidad Leche cruda
+el porcentaje mínimo de grasa que debe tene…
+22:58:13 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.031s | num_docs=3
+22:58:13 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1461
+22:58:13 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+22:58:13 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=70 | con_historial=True
+22:58:15 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.260s
+22:58:15 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.260s | len_respuesta_raw=93
+22:58:15 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.296s | query() total=2.321s
+22:58:15 | INFO  | app.main | [/chat] RAG completado en 2.321s (total: 2.322s)
+22:58:15 | INFO  | app.main | [/chat] Respuesta serializada | len=93 | fuentes=3 | total=2.322s
+23:29:44 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+23:30:06 | INFO  | app.main | [/ingest] Inicio de indexación…
+23:30:06 | INFO  | app.rag.document_loader | Cargados 3 documento(s) desde 3 archivo(s) .md
+23:30:06 | INFO  | app.rag.chunking | Chunking MD híbrido: secciones=83 chunks_finales=210 descartados=4 promedio_tokens=151.2
+23:30:06 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+23:30:06 | INFO  | app.rag.service | Indexando 210 chunks en Chroma…
+23:30:06 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+23:30:06 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+23:30:06 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+23:30:06 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+23:30:08 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.418s
+23:30:08 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.420s
+23:30:12 | INFO  | app.main | [/ingest] OK en 6.511s | resultado={'documents_processed': 3, 'chunks_indexed': 210, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+23:30:35 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=51 | preview='¿Qué normativa aplica al acopio de leche en fincas?'
+23:30:35 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:30:35 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=51
+23:30:35 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:30:35 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+23:30:35 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.011s
+23:30:35 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.013s
+23:30:35 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+23:30:35 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.026s
+23:30:35 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.027s
+23:30:35 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+23:30:35 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=51
+23:30:35 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.020s
+23:30:35 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+23:30:35 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=934 | query_preview='¿Qué normativa aplica al acopio de leche en fincas?'
+23:30:35 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6053 chars=132 source=normativas_lacteas_colombia_rag.md section=Glosario breve > Decreto 2838 de 2006 | ## Decreto 2838 de 2006  
+Norma que modifica parcialmente el marco regulatorio en lo referente a la comercialización de …
+23:30:35 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5801 chars=148 source=normativas_lacteas_colombia_rag.md section=Preguntas y respuestas útiles para chatbot > ¿A qué tipos de leche aplica la regulación mencionada? | ## ¿A qué tipos de leche aplica la regulación mencionada?  
+Aplica a la leche de animales bovinos, bufalinos y caprinos …
+23:30:35 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5787 chars=654 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Iv | 3. La rehigienización de la leche para consumo human o directo.
+4. La comercialización en el territorio nacional de prod…
+23:30:35 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.023s | num_docs=3
+23:30:35 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1272
+23:30:35 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:30:35 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=51 | con_historial=False
+23:30:38 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.037s
+23:30:38 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.038s | len_respuesta_raw=273
+23:30:38 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.064s | query() total=3.105s
+23:30:38 | INFO  | app.main | [/chat] RAG completado en 3.106s (total: 3.108s)
+23:30:38 | INFO  | app.main | [/chat] Respuesta serializada | len=273 | fuentes=3 | total=3.109s
+23:32:11 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=41 | preview='¿Qué requisitos tiene el acopio de leche?'
+23:32:11 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:32:11 | INFO  | app.rag.service | [RAG] query() inicio | k=2 (dynamic) threshold=0.35 | len(pregunta)=41
+23:32:11 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:32:11 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+23:32:11 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.012s
+23:32:11 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.014s
+23:32:11 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+23:32:11 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=2 score_threshold=0.350
+23:32:11 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=2 | fetch=20 | score_threshold=0.350 | len(query)=41
+23:32:11 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.015s
+23:32:11 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=2 (superaron threshold: 20 de 20 candidatos)
+23:32:11 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=2 | chars_contexto_total=802 | query_preview='¿Qué requisitos tiene el acopio de leche?'
+23:32:11 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6251 chars=148 source=normativas_lacteas_colombia_rag.md section=Preguntas y respuestas útiles para chatbot > ¿A qué tipos de leche aplica la regulación mencionada? | ## ¿A qué tipos de leche aplica la regulación mencionada?  
+Aplica a la leche de animales bovinos, bufalinos y caprinos …
+23:32:11 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6202 chars=654 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Iv | 3. La rehigienización de la leche para consumo human o directo.
+4. La comercialización en el territorio nacional de prod…
+23:32:11 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.018s | num_docs=2
+23:32:11 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1046
+23:32:11 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:32:11 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=41 | con_historial=True
+23:32:14 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.793s
+23:32:14 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.793s | len_respuesta_raw=65
+23:32:14 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.814s | query() total=2.829s
+23:32:14 | INFO  | app.main | [/chat] RAG completado en 2.829s (total: 2.831s)
+23:32:14 | INFO  | app.main | [/chat] Respuesta serializada | len=65 | fuentes=2 | total=2.831s
+23:34:52 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:34:52 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:34:52 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=61
+23:34:52 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:34:52 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+23:34:52 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.012s
+23:34:52 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.013s
+23:34:52 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+23:34:52 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+23:34:52 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=61
+23:34:52 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.014s
+23:34:52 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+23:34:52 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1670 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:34:52 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5490 chars=637 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Vi | 2. En el tanque de almacenamiento inicial de leche enfriada cruda.
+2.1. Registro de temperatura.  
+#### Artículo 26. Alm…
+23:34:52 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5377 chars=377 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Viii | 2. Embudo.
+3. Tanque con mecanismo de graduación y agitación, cuando se requiera.
+4. Tanque con circulación de agua.
+Par…
+23:34:52 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5205 chars=656 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Ii | 3. Los establos fijos deben disponer, por lo menos, de las siguientes secciones:
+3.1. Para el ordeño.
+3.2. Para equipos …
+23:34:52 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.018s | num_docs=3
+23:34:52 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1940
+23:34:52 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:34:52 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=True
+23:34:55 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.156s
+23:34:55 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.157s | len_respuesta_raw=320
+23:34:55 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.179s | query() total=3.194s
+23:34:55 | INFO  | app.main | [/chat] RAG completado en 3.195s (total: 3.199s)
+23:34:55 | INFO  | app.main | [/chat] Respuesta serializada | len=320 | fuentes=3 | total=3.199s
+23:35:18 | INFO  | app.main | [/ingest] Inicio de indexación…
+23:35:18 | INFO  | app.rag.document_loader | Cargados 4 documento(s) desde 4 archivo(s) .md
+23:35:18 | INFO  | app.rag.chunking | Chunking MD híbrido: secciones=91 chunks_finales=219 descartados=4 promedio_tokens=150.2
+23:35:18 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+23:35:18 | INFO  | app.rag.vectorstore | Colección eliminada: rag_docs
+23:35:18 | INFO  | app.rag.service | Indexando 219 chunks en Chroma…
+23:35:22 | INFO  | app.main | [/ingest] OK en 4.140s | resultado={'documents_processed': 4, 'chunks_indexed': 219, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+23:35:28 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:35:28 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:35:28 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=61
+23:35:28 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:35:28 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+23:35:28 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.012s
+23:35:28 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.013s
+23:35:28 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+23:35:28 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+23:35:28 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=61
+23:35:28 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.020s
+23:35:28 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+23:35:28 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1670 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:35:28 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5490 chars=637 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Vi | 2. En el tanque de almacenamiento inicial de leche enfriada cruda.
+2.1. Registro de temperatura.  
+#### Artículo 26. Alm…
+23:35:28 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5377 chars=377 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Viii | 2. Embudo.
+3. Tanque con mecanismo de graduación y agitación, cuando se requiera.
+4. Tanque con circulación de agua.
+Par…
+23:35:28 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5205 chars=656 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Ii | 3. Los establos fijos deben disponer, por lo menos, de las siguientes secciones:
+3.1. Para el ordeño.
+3.2. Para equipos …
+23:35:28 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.025s | num_docs=3
+23:35:28 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1940
+23:35:28 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:35:28 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=True
+23:35:31 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.037s
+23:35:31 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.037s | len_respuesta_raw=297
+23:35:31 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.066s | query() total=3.082s
+23:35:31 | INFO  | app.main | [/chat] RAG completado en 3.082s (total: 3.084s)
+23:35:31 | INFO  | app.main | [/chat] Respuesta serializada | len=297 | fuentes=3 | total=3.085s
+23:36:54 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+23:36:55 | INFO  | app.main | [/ingest] Inicio de indexación…
+23:36:55 | INFO  | app.rag.document_loader | Cargados 4 documento(s) desde 4 archivo(s) .md
+23:36:55 | INFO  | app.rag.chunking | Chunking MD híbrido: secciones=91 chunks_finales=219 descartados=4 promedio_tokens=150.2
+23:36:55 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+23:36:55 | INFO  | app.rag.service | Indexando 219 chunks en Chroma…
+23:36:55 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+23:36:55 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+23:36:55 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+23:36:56 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+23:36:58 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.326s
+23:36:58 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.328s
+23:37:03 | INFO  | app.main | [/ingest] OK en 7.795s | resultado={'documents_processed': 4, 'chunks_indexed': 219, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+23:37:09 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:37:09 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:37:09 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=61
+23:37:09 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:37:09 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+23:37:09 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.010s
+23:37:09 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.012s
+23:37:09 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+23:37:09 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.026s
+23:37:09 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.026s
+23:37:09 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+23:37:09 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=61
+23:37:09 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.019s
+23:37:09 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+23:37:09 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1670 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+23:37:09 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5490 chars=637 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Vi | 2. En el tanque de almacenamiento inicial de leche enfriada cruda.
+2.1. Registro de temperatura.  
+#### Artículo 26. Alm…
+23:37:09 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5377 chars=377 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Viii | 2. Embudo.
+3. Tanque con mecanismo de graduación y agitación, cuando se requiera.
+4. Tanque con circulación de agua.
+Par…
+23:37:09 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5205 chars=656 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Ii | 3. Los establos fijos deben disponer, por lo menos, de las siguientes secciones:
+3.1. Para el ordeño.
+3.2. Para equipos …
+23:37:09 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.023s | num_docs=3
+23:37:09 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1940
+23:37:09 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:37:09 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=False
+23:37:13 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 3.452s
+23:37:13 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 3.452s | len_respuesta_raw=406
+23:37:13 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 3.479s | query() total=3.520s
+23:37:13 | INFO  | app.main | [/chat] RAG completado en 3.520s (total: 3.521s)
+23:37:13 | INFO  | app.main | [/chat] Respuesta serializada | len=406 | fuentes=3 | total=3.521s
+23:40:57 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=64 | preview='¿En cuántas horas debo vender la leche cruda después del ordeño?'
+23:40:57 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:40:57 | INFO  | app.rag.service | [RAG] query() inicio | k=3 (dynamic) threshold=0.35 | len(pregunta)=64
+23:40:57 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:40:57 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.002s (objeto listo; búsqueda embeddeará la query)
+23:40:57 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.012s
+23:40:57 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.015s
+23:40:57 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+23:40:57 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=3 score_threshold=0.350
+23:40:57 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=3 | fetch=20 | score_threshold=0.350 | len(query)=64
+23:40:57 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=20 | 0.015s
+23:40:57 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=3 (superaron threshold: 20 de 20 candidatos)
+23:40:57 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=3 | chars_contexto_total=1463 | query_preview='¿En cuántas horas debo vender la leche cruda después del ordeño?'
+23:40:57 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6095 chars=688 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Xi | higiénico-sanitaria.
+Parágrafo. 2°. Prohíbase el reempaque de leche en polvo. El empaque de la leche en polvo sólo se po…
+23:40:57 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5789 chars=670 source=Decreto_616_de_2006.md section=Decreto 616 de 2006 > Título Ii > Capítulo Ii | especial énfasis en las radicales y de orden preventivo.  
+#### Artículo 8º. Salud e higiene del personal de ordeño. El …
+23:40:57 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5783 chars=105 source=normativas_lacteas_colombia_rag.md section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de grasa para leche entera? | ## ¿Cuál es el mínimo de grasa para leche entera?  
+La leche entera debe tener mínimo 3.0 % m/v de grasa.
+23:40:57 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.020s | num_docs=3
+23:40:57 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=1789
+23:40:57 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:40:57 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=64 | con_historial=True
+23:41:00 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.612s
+23:41:00 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.613s | len_respuesta_raw=146
+23:41:00 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.637s | query() total=2.655s
+23:41:00 | INFO  | app.main | [/chat] RAG completado en 2.655s (total: 2.657s)
+23:41:00 | INFO  | app.main | [/chat] Respuesta serializada | len=146 | fuentes=3 | total=2.658s
+23:56:19 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+23:56:27 | INFO  | app.main | [/ingest] Inicio de indexación…
+23:56:27 | INFO  | app.rag.document_loader | Cargados 4 documento(s) desde 4 archivo(s) .md
+23:56:27 | WARNING | app.rag.chunking | Chunk con ~tokens estimados altos (290) en fuente guia_productor_lacteo_rag.md sección=Guía para Productores Lácteos - Colombia > 6. FAQ para Productores Lácteos
+23:56:27 | WARNING | app.rag.chunking | Chunk con ~tokens estimados altos (231) en fuente normativas_lacteas_colombia_rag.md sección=Fragmentos para RAG > RAG-NLC-002 - Objeto y alcance normativo
+23:56:27 | WARNING | app.rag.chunking | Chunk con ~tokens estimados altos (232) en fuente normativas_lacteas_colombia_rag.md sección=Fragmentos para RAG > RAG-NLC-004 - Sanidad animal y medicamentos veterinarios
+23:56:27 | INFO  | app.rag.chunking | Chunking MD híbrido: secciones=91 chunks_finales=218 descartados=4 promedio_tokens=180.5
+23:56:27 | INFO  | app.rag.vectorstore | Chroma PersistentClient path=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma
+23:56:27 | INFO  | app.rag.service | Indexando 218 chunks en Chroma…
+23:56:27 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+23:56:27 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+23:56:27 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+23:56:28 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+23:56:30 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 2.541s
+23:56:30 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 2.543s
+23:56:34 | INFO  | app.main | [/ingest] OK en 7.046s | resultado={'documents_processed': 4, 'chunks_indexed': 218, 'vector_store_dir': 'C:\\Users\\JuniorEcheverri\\OneDrive - CONSENSUS SAS\\Documentos\\Universidad\\Integrador\\ChatBot\\storage\\chroma', 'collection': 'rag_docs'}
+23:56:42 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=64 | preview='¿En cuántas horas debo vender la leche cruda después del ordeño?'
+23:56:42 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:56:42 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=64
+23:56:42 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:56:42 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+23:56:42 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.010s
+23:56:42 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.011s
+23:56:42 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+23:56:42 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.019s
+23:56:42 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.020s
+23:56:42 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+23:56:42 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=64
+23:56:42 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.025s
+23:56:42 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+23:56:42 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=1877 | query_preview='¿En cuántas horas debo vender la leche cruda después del ordeño?'
+23:56:42 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6755 chars=255 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de grasa para leche entera? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+23:56:42 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6623 chars=606 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | Documento: guia_productor_lacteo_rag.md | Sección: Guía para Productores Lácteos - Colombia > 4. Comercialización de Lec…
+23:56:42 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.6515 chars=373 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Quién puede autorizar la venta de leche cruda en zonas especiales? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Quién puede autor…
+23:56:42 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.6404 chars=251 source=normativas_lacteas_colombia_rag.md kind=summary section=Glosario breve > Leche cruda | Documento: normativas_lacteas_colombia_rag.md | Sección: Glosario breve > Leche cruda
+
+## Leche cruda  
+Leche sin higien…
+23:56:42 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.6175 chars=392 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo …
+23:56:42 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.031s | num_docs=5
+23:56:42 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2588
+23:56:42 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:56:42 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=64 | con_historial=False
+23:56:44 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.201s
+23:56:44 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.202s | len_respuesta_raw=403
+23:56:44 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.238s | query() total=2.271s
+23:56:44 | INFO  | app.main | [/chat] RAG completado en 2.271s (total: 2.273s)
+23:56:44 | INFO  | app.main | [/chat] Respuesta serializada | len=403 | fuentes=5 | total=2.274s
+23:58:44 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=69 | preview='Cual es el procentaje minimo de grasa que debe tener la leche entera?'
+23:58:44 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+23:58:44 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=69
+23:58:44 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+23:58:44 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+23:58:44 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.012s
+23:58:44 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.015s
+23:58:44 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+23:58:44 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+23:58:44 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=69
+23:58:44 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.014s
+23:58:44 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+23:58:44 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=2187 | query_preview='Cual es el procentaje minimo de grasa que debe tener la leche entera?'
+23:58:44 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.7476 chars=255 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de grasa para leche entera? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+23:58:44 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5930 chars=317 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de extracto seco total? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+23:58:44 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5787 chars=284 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de proteína para leche líquida bovina? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+23:58:44 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.5562 chars=725 source=normativas_lacteas_colombia_rag.md kind=summary section=Fragmentos para RAG > RAG-NLC-010 - Estándares fisicoquímicos de la leche | Documento: normativas_lacteas_colombia_rag.md | Sección: Fragmentos para RAG > RAG-NLC-010 - Estándares fisicoquímicos d…
+23:58:44 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.5463 chars=606 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | Documento: guia_productor_lacteo_rag.md | Sección: Guía para Productores Lácteos - Colombia > 4. Comercialización de Lec…
+23:58:44 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.021s | num_docs=5
+23:58:44 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2905
+23:58:44 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+23:58:44 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=69 | con_historial=True
+23:58:46 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 1.992s
+23:58:46 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 1.993s | len_respuesta_raw=248
+23:58:46 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.019s | query() total=2.035s
+23:58:46 | INFO  | app.main | [/chat] RAG completado en 2.035s (total: 2.037s)
+23:58:46 | INFO  | app.main | [/chat] Respuesta serializada | len=248 | fuentes=5 | total=2.037s
+00:01:55 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=58 | preview='Cuales son los medicamentos veterinarios con registro ICA?'
+00:01:55 | INFO  | app.main | [/chat] Guardrail: fuera de alcance (sin RAG/Gemini) | 0.001s
+00:03:14 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=68 | preview='Qué infraestructura debo tener en mi hato para ordeñar leche segura?'
+00:03:14 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+00:03:14 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=68
+00:03:14 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+00:03:14 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+00:03:15 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.017s
+00:03:15 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.018s
+00:03:15 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+00:03:15 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+00:03:15 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=68
+00:03:15 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.017s
+00:03:15 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+00:03:15 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=2303 | query_preview='Qué infraestructura debo tener en mi hato para ordeñar leche segura?'
+00:03:15 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6593 chars=385 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Qué infraestructura deben tener los hatos? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Qué infraestructu…
+00:03:15 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6032 chars=255 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de grasa para leche entera? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+00:03:15 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5993 chars=606 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | Documento: guia_productor_lacteo_rag.md | Sección: Guía para Productores Lácteos - Colombia > 4. Comercialización de Lec…
+00:03:15 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.5881 chars=806 source=normativas_lacteas_colombia_rag.md kind=summary section=Fragmentos para RAG > RAG-NLC-003 - Requisitos de infraestructura en hatos | Documento: normativas_lacteas_colombia_rag.md | Sección: Fragmentos para RAG > RAG-NLC-003 - Requisitos de infraestructu…
+00:03:15 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.5767 chars=251 source=normativas_lacteas_colombia_rag.md kind=summary section=Glosario breve > Leche cruda | Documento: normativas_lacteas_colombia_rag.md | Sección: Glosario breve > Leche cruda
+
+## Leche cruda  
+Leche sin higien…
+00:03:15 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.023s | num_docs=5
+00:03:15 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2949
+00:03:15 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+00:03:15 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=68 | con_historial=True
+00:03:17 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.892s
+00:03:17 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.892s | len_respuesta_raw=452
+00:03:17 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.919s | query() total=2.939s
+00:03:17 | INFO  | app.main | [/chat] RAG completado en 2.939s (total: 2.940s)
+00:03:17 | INFO  | app.main | [/chat] Respuesta serializada | len=452 | fuentes=5 | total=2.940s
+00:04:16 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=72 | preview='¿Qué certificaciones necesitan mis trabajadores para manipular la leche?'
+00:04:16 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+00:04:16 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=72
+00:04:16 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+00:04:16 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.000s (objeto listo; búsqueda embeddeará la query)
+00:04:16 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.016s
+00:04:16 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.018s
+00:04:16 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+00:04:16 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+00:04:16 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=72
+00:04:16 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.014s
+00:04:16 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+00:04:16 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=2800 | query_preview='¿Qué certificaciones necesitan mis trabajadores para manipular la leche?'
+00:04:16 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.6890 chars=349 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Qué requisitos debe cumplir el personal manipulador? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Qué requisitos de…
+00:04:16 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6398 chars=564 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Qué normas son la base del análisis técnico sobre leche en Colombia? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Qué normas son la…
+00:04:16 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.6242 chars=379 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Está permitida la venta de leche cruda para consumo humano directo? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Está permitida la…
+00:04:16 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.6117 chars=747 source=normativas_lacteas_colombia_rag.md kind=summary section=Fragmentos para RAG > RAG-NLC-006 - Requisitos del personal manipulador | Documento: normativas_lacteas_colombia_rag.md | Sección: Fragmentos para RAG > RAG-NLC-006 - Requisitos del personal man…
+00:04:16 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.6016 chars=761 source=Decreto_616_de_2006.md kind=legal_full section=Decreto 616 de 2006 > Título Ii > Capítulo I | Documento: Decreto_616_de_2006.md | Sección: Decreto 616 de 2006 > Título Ii > Capítulo I
+
+conforme a lo dispuesto en la…
+00:04:16 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.020s | num_docs=5
+00:04:16 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=3511
+00:04:16 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+00:04:16 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=72 | con_historial=True
+00:04:18 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.356s
+00:04:18 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.357s | len_respuesta_raw=368
+00:04:18 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.382s | query() total=2.402s
+00:04:18 | INFO  | app.main | [/chat] RAG completado en 2.403s (total: 2.404s)
+00:04:18 | INFO  | app.main | [/chat] Respuesta serializada | len=368 | fuentes=5 | total=2.406s
+00:05:25 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=71 | preview='¿Qué hago si mi leche no cumple con los estándares de proteína o grasa?'
+00:05:25 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=c15a145b-a18d-4639-bd51-8eb81336cab0
+00:05:25 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=71
+00:05:25 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+00:05:25 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 0.001s (objeto listo; búsqueda embeddeará la query)
+00:05:25 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.017s
+00:05:25 | INFO  | app.rag.service | [RAG] Vector store cargado en 0.019s
+00:05:25 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.000s
+00:05:25 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+00:05:25 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=71
+00:05:25 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.017s
+00:05:25 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+00:05:25 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=1971 | query_preview='¿Qué hago si mi leche no cumple con los estándares de proteína o grasa?'
+00:05:25 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.7032 chars=284 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de proteína para leche líquida bovina? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+00:05:25 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6475 chars=255 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo de grasa para leche entera? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Cuál es el mínimo…
+00:05:25 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.6282 chars=401 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Qué suplementos están prohibidos en la alimentación animal? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Qué suplementos e…
+00:05:25 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.6232 chars=306 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿A qué tipos de leche aplica la regulación mencionada? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿A qué tipos de le…
+00:05:25 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.6066 chars=725 source=normativas_lacteas_colombia_rag.md kind=summary section=Fragmentos para RAG > RAG-NLC-010 - Estándares fisicoquímicos de la leche | Documento: normativas_lacteas_colombia_rag.md | Sección: Fragmentos para RAG > RAG-NLC-010 - Estándares fisicoquímicos d…
+00:05:25 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.023s | num_docs=5
+00:05:25 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2724
+00:05:25 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+00:05:25 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=71 | con_historial=True
+00:05:28 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.442s
+00:05:28 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.443s | len_respuesta_raw=65
+00:05:28 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.469s | query() total=2.490s
+00:05:28 | INFO  | app.main | [/chat] RAG completado en 2.491s (total: 2.492s)
+00:05:28 | INFO  | app.main | [/chat] Respuesta serializada | len=65 | fuentes=5 | total=2.493s

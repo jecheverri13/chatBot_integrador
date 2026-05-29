@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+storage/
+evaluations/*.json
+evaluations/*.md
+!evaluations/.gitkeep
+*.egg-info/
+.pytest_cache/
+.cursor
+.claude
+.vscode
+.pytest_cache

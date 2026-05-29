@@ -1,0 +1,10 @@
+# Copia como docker-compose.override.yml para desarrollo local (no commitear secretos).
+# docker compose up --build
+
+services:
+  api:
+    environment:
+      EMBEDDING_DEVICE: cpu
+    # Montar código en caliente (opcional; requiere imagen dev distinta):
+    # volumes:
+    #   - ./app:/app/app:ro
