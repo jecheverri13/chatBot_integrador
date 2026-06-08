@@ -7,6 +7,7 @@ import re
 
 logger = logging.getLogger(__name__)
 
+_FRONTMATTER_RE = re.compile(r"\A---\s*\n.*?\n---\s*\n", re.DOTALL)
 _HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 _MD_LINK_RE = re.compile(r"\[([^\]]+)\]\([^)]+\)")
 _MULTI_BLANK_RE = re.compile(r"\n{3,}")
@@ -18,7 +19,8 @@ _PRIVATE_USE_RE = re.compile(r"[\uE000-\uF8FF]+")
 
 def clean_markdown(text: str) -> str:
     """Elimina ruido de sintaxis MD que no aporta a la recuperación semántica."""
-    cleaned = _HTML_COMMENT_RE.sub("", text)
+    cleaned = _FRONTMATTER_RE.sub("", text)
+    cleaned = _HTML_COMMENT_RE.sub("", cleaned)
     cleaned = _CITATION_BRACKET_RE.sub("", cleaned)
     cleaned = _FILECITE_RE.sub("", cleaned)
     cleaned = _PRIVATE_USE_RE.sub("", cleaned)

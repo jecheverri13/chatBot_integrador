@@ -1591,3 +1591,129 @@ conforme a lo dispuesto en la…
 00:05:28 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.469s | query() total=2.490s
 00:05:28 | INFO  | app.main | [/chat] RAG completado en 2.491s (total: 2.492s)
 00:05:28 | INFO  | app.main | [/chat] Respuesta serializada | len=65 | fuentes=5 | total=2.493s
+17:12:53 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+17:13:43 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+17:13:43 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=67083aea-84ce-4a06-870c-47d70afb050d
+17:13:43 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=61
+17:13:43 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+17:13:43 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+17:13:43 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+17:13:43 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+17:13:43 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+17:13:58 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 15.317s
+17:13:58 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 15.319s
+17:13:58 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 15.321s (objeto listo; búsqueda embeddeará la query)
+17:14:00 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 1.467s
+17:14:00 | INFO  | app.rag.service | [RAG] Vector store cargado en 16.789s
+17:14:00 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+17:14:00 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.026s
+17:14:00 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.027s
+17:14:00 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+17:14:00 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=61
+17:14:00 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.177s
+17:14:00 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+17:14:00 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=1851 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+17:14:00 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.5988 chars=251 source=normativas_lacteas_colombia_rag.md kind=summary section=Glosario breve > Leche cruda | Documento: normativas_lacteas_colombia_rag.md | Sección: Glosario breve > Leche cruda
+
+## Leche cruda  
+Leche sin higien…
+17:14:00 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.5925 chars=392 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo …
+17:14:00 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.5920 chars=606 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | Documento: guia_productor_lacteo_rag.md | Sección: Guía para Productores Lácteos - Colombia > 4. Comercialización de Lec…
+17:14:00 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.5752 chars=229 source=normativas_lacteas_colombia_rag.md kind=summary section=Glosario breve > Tiempo de retiro | Documento: normativas_lacteas_colombia_rag.md | Sección: Glosario breve > Tiempo de retiro
+
+## Tiempo de retiro  
+Period…
+17:14:00 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.5750 chars=373 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿Quién puede autorizar la venta de leche cruda en zonas especiales? | Documento: normativas_lacteas_colombia_rag.md | Sección: Preguntas y respuestas útiles para chatbot > ¿Quién puede autor…
+17:14:00 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.183s | num_docs=5
+17:14:00 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=2504
+17:14:00 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+17:14:00 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=False
+17:14:04 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 4.456s
+17:14:04 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 4.457s | len_respuesta_raw=1165
+17:14:04 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 4.646s | query() total=21.466s
+17:14:04 | INFO  | app.main | [/chat] RAG completado en 21.466s (total: 21.468s)
+17:14:04 | INFO  | app.main | [/chat] Respuesta serializada | len=1165 | fuentes=5 | total=21.469s
+16:57:08 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+16:58:23 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+16:58:23 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=b2575113-f8cc-4421-af2c-2021f2d112b5
+16:58:23 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=61
+16:58:23 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+16:58:23 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+16:58:23 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+16:58:23 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+16:58:24 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+16:58:30 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 6.717s
+16:58:30 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 6.719s
+16:58:30 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 6.721s (objeto listo; búsqueda embeddeará la query)
+16:58:30 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.078s
+16:58:30 | INFO  | app.rag.service | [RAG] Vector store cargado en 6.799s
+16:58:30 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+16:58:30 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.030s
+16:58:30 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.030s
+16:58:30 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+16:58:30 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=61
+16:58:30 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.086s
+16:58:30 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+16:58:30 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=1314 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+16:58:30 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.8411 chars=220 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 6. FAQ para Productores Lácteos > ¿Cuánto tiempo puedo almacenar leche cruda antes de venderla? | ¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?
+Pregunta: ¿Cuánto tiempo puedo almacenar leche cruda antes…
+16:58:30 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6990 chars=191 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 6. FAQ para Productores Lácteos > ¿Puedo vender leche cruda fuera de zonas especiales? | ¿Puedo vender leche cruda fuera de zonas especiales?
+Pregunta: ¿Puedo vender leche cruda fuera de zonas especiales?
+Resp…
+16:58:30 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.6403 chars=325 source=Decreto_616_de_2006.md kind=legal_full section=Decreto 616 de 2006 > Título Ii > Capítulo Vi > Artículo 26. Almacenamiento de leche cruda enfriada. Los tanques destinados al almacenamiento de leche cruda enfriada deben: | Artículo 26. Almacenamiento de leche cruda enfriada. Los tanques destinados al almacenamiento de leche cruda enfriada de…
+16:58:30 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.6400 chars=289 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas? | ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas?
+## ¿En cuánto tiempo debe venderse la leche cruda…
+16:58:30 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.5821 chars=289 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | 4. Comercialización de Leche Cruda y Enfriada
+- Leche cruda: vender en < 8 horas del ordeño.
+- Leche cruda enfriada (4°C…
+16:58:30 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.091s | num_docs=5
+16:58:30 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=4007
+16:58:30 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+16:58:30 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=False
+16:58:34 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 4.020s
+16:58:34 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 4.021s | len_respuesta_raw=924
+16:58:34 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 4.115s | query() total=10.947s
+16:58:34 | INFO  | app.main | [/chat] RAG completado en 10.947s (total: 10.949s)
+16:58:34 | INFO  | app.main | [/chat] Respuesta serializada | len=924 | fuentes=5 | total=10.950s
+17:03:57 | INFO  | app.main | Aplicación iniciada (v2.0.0)
+17:04:00 | INFO  | app.main | [/chat] Petición recibida | len_pregunta=61 | preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+17:04:00 | INFO  | app.main | [/chat] Guardrail: en alcance; iniciando RAG… | session=5894bf48-972e-4612-88fc-191ad6f4cd39
+17:04:00 | INFO  | app.rag.service | [RAG] query() inicio | k=5 threshold=0.35 | len(pregunta)=61
+17:04:00 | INFO  | app.rag.service | [RAG] Abriendo Chroma | dir=C:\Users\JuniorEcheverri\OneDrive - CONSENSUS SAS\Documentos\Universidad\Integrador\ChatBot\storage\chroma | collection=rag_docs
+17:04:00 | INFO  | app.rag.service | [RAG] Primera carga del modelo de embeddings (SentenceTransformer). Suele mostrar 'Loading weights' y puede tardar 10–60s en CPU la primera vez.
+17:04:00 | INFO  | app.rag.embeddings | Embeddings HuggingFace modelo=sentence-transformers/all-MiniLM-L6-v2 device=cpu (HF_TOKEN aplicado para Hub)
+17:04:00 | INFO  | app.rag.embeddings | [embeddings] Construyendo SentenceTransformer (descarga/caché + 'Loading weights')…
+17:04:01 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+17:04:04 | INFO  | app.rag.embeddings | [embeddings] SentenceTransformer construido en 3.769s
+17:04:04 | INFO  | app.rag.service | [RAG] Modelo de embeddings listo en 3.771s
+17:04:04 | INFO  | app.rag.service | [RAG] Chroma: embedding_function asignada en 3.773s (objeto listo; búsqueda embeddeará la query)
+17:04:04 | INFO  | app.rag.service | [RAG] Instancia Chroma creada en 0.083s
+17:04:04 | INFO  | app.rag.service | [RAG] Vector store cargado en 3.858s
+17:04:04 | INFO  | app.rag.service | [RAG] Inicializando ChatGoogleGenerativeAI | model=gemini-2.5-flash
+17:04:04 | INFO  | app.rag.service | [RAG] Cliente Gemini listo en 0.049s
+17:04:04 | INFO  | app.rag.service | [RAG] LLM resuelto en 0.049s
+17:04:04 | INFO  | app.rag.rag_chain | [rag_chain] Inicio query | k=5 score_threshold=0.350
+17:04:04 | INFO  | app.rag.retriever | [retrieval] Inicio | k_final=5 | fetch=40 | score_threshold=0.350 | len(query)=61
+17:04:04 | INFO  | app.rag.retriever | [retrieval] similarity_search_with_relevance_scores terminó | candidatos=40 | 0.097s
+17:04:04 | INFO  | app.rag.retriever | [retrieval] Tras umbral: conservados=5 (superaron threshold: 40 de 40 candidatos)
+17:04:04 | INFO  | app.rag.retriever | [retrieval] Resumen hits | num_docs=5 | chars_contexto_total=1314 | query_preview='¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?'
+17:04:04 | INFO  | app.rag.retriever | [retrieval] hit #1 score=0.8411 chars=220 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 6. FAQ para Productores Lácteos > ¿Cuánto tiempo puedo almacenar leche cruda antes de venderla? | ¿Cuánto tiempo puedo almacenar leche cruda antes de venderla?
+Pregunta: ¿Cuánto tiempo puedo almacenar leche cruda antes…
+17:04:04 | INFO  | app.rag.retriever | [retrieval] hit #2 score=0.6990 chars=191 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 6. FAQ para Productores Lácteos > ¿Puedo vender leche cruda fuera de zonas especiales? | ¿Puedo vender leche cruda fuera de zonas especiales?
+Pregunta: ¿Puedo vender leche cruda fuera de zonas especiales?
+Resp…
+17:04:04 | INFO  | app.rag.retriever | [retrieval] hit #3 score=0.6403 chars=325 source=Decreto_616_de_2006.md kind=legal_full section=Decreto 616 de 2006 > Título Ii > Capítulo Vi > Artículo 26. Almacenamiento de leche cruda enfriada. Los tanques destinados al almacenamiento de leche cruda enfriada deben: | Artículo 26. Almacenamiento de leche cruda enfriada. Los tanques destinados al almacenamiento de leche cruda enfriada de…
+17:04:04 | INFO  | app.rag.retriever | [retrieval] hit #4 score=0.6400 chars=289 source=normativas_lacteas_colombia_rag.md kind=summary section=Preguntas y respuestas útiles para chatbot > ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas? | ¿En cuánto tiempo debe venderse la leche cruda en zonas excepcionadas?
+## ¿En cuánto tiempo debe venderse la leche cruda…
+17:04:04 | INFO  | app.rag.retriever | [retrieval] hit #5 score=0.5821 chars=289 source=guia_productor_lacteo_rag.md kind=summary section=Guía para Productores Lácteos - Colombia > 4. Comercialización de Leche Cruda y Enfriada | 4. Comercialización de Leche Cruda y Enfriada
+- Leche cruda: vender en < 8 horas del ordeño.
+- Leche cruda enfriada (4°C…
+17:04:04 | INFO  | app.rag.rag_chain | [rag_chain] Retrieval listo en 0.105s | num_docs=5
+17:04:04 | INFO  | app.rag.rag_chain | [rag_chain] Contexto formateado en 0.000s | len_context_chars=4007
+17:04:04 | INFO  | app.rag.rag_chain | [rag_chain] Cadena LCEL construida en 0.000s
+17:04:04 | INFO  | app.rag.rag_chain | [rag_chain] Invocando Gemini (con reintentos si 429) | len_question=61 | con_historial=False
+17:04:07 | INFO  | app.rag.service | [RAG] Invocación Gemini OK | intento=1/2 | 2.875s
+17:04:07 | INFO  | app.rag.rag_chain | [rag_chain] Gemini respondió en 2.875s | len_respuesta_raw=268
+17:04:07 | INFO  | app.rag.service | [RAG] rag_query (retrieval+Gemini) en 2.984s | query() total=6.896s
+17:04:07 | INFO  | app.main | [/chat] RAG completado en 6.897s (total: 6.898s)
+17:04:07 | INFO  | app.main | [/chat] Respuesta serializada | len=264 | fuentes=5 | total=6.899s

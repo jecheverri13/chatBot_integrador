@@ -28,14 +28,30 @@ _HALLUCINATION_PATTERNS = [
     re.compile(r"based on my general knowledge", re.I),
 ]
 
+_SECTION_CITE_RE = re.compile(
+    r"\s*\((?:Sección|sección|Fuente|fuente)\s*:[^)]*\)",
+    re.I,
+)
+
 
 def has_hallucination_markers(text: str) -> bool:
     return any(p.search(text) for p in _HALLUCINATION_PATTERNS)
 
 
+def _context_body(doc: Any) -> str:
+    return doc.metadata.get("parent_content") or doc.page_content
+
+
 def format_docs_for_prompt(docs: list[Any]) -> str:
+    seen_parents: set[str] = set()
     parts: list[str] = []
     for doc in docs:
+        parent_id = doc.metadata.get("parent_id") or doc.metadata.get("section", "")
+        if parent_id and parent_id in seen_parents:
+            continue
+        if parent_id:
+            seen_parents.add(parent_id)
+
         raw_src = doc.metadata.get("source", "")
         src = Path(str(raw_src)).name if raw_src else doc.metadata.get("filename", "")
         section = doc.metadata.get("section") or doc.metadata.get("heading", "")
@@ -44,7 +60,7 @@ def format_docs_for_prompt(docs: list[Any]) -> str:
         if page is not None and str(page).strip():
             loc = f"{loc}, página {page}".strip(", ")
         loc_suffix = f" ({loc})" if loc else ""
-        parts.append(f"Fuente: {src}{loc_suffix}\n{doc.page_content}")
+        parts.append(f"Fuente: {src}{loc_suffix}\n{_context_body(doc)}")
     return "\n\n".join(parts)
 
 
@@ -55,7 +71,10 @@ def post_process_answer(text: str) -> str:
             return (
                 "No encontré información suficiente en los documentos para responder esta pregunta."
             )
-    return text
+    cleaned = _SECTION_CITE_RE.sub("", text)
+    cleaned = re.sub(r"  +", " ", cleaned)
+    cleaned = re.sub(r"\s+\.", ".", cleaned)
+    return cleaned.strip()
 
 
 def build_prompt_chain(llm: ChatGoogleGenerativeAI):
@@ -141,7 +160,7 @@ def query(
         )
         answer = (raw or "").strip() or "No se pudo generar respuesta."
         answer = post_process_answer(answer)
-        contexts = [d.page_content for d in docs]
+        contexts = [_context_body(d) for d in docs]
         sources = [
             {
                 "source": Path(str(d.metadata.get("source", ""))).name

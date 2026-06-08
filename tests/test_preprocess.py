@@ -34,6 +34,14 @@ def test_removes_citation_artifacts() -> None:
     assert "filecite" not in cleaned.lower()
 
 
+def test_removes_yaml_frontmatter() -> None:
+    raw = "---\ntitle: test\n---\n\n# Título\n\nContenido."
+    cleaned = clean_markdown(raw)
+    assert "title:" not in cleaned
+    assert "# Título" in cleaned
+    assert "Contenido" in cleaned
+
+
 def test_preprocess_returns_segment() -> None:
     segments = preprocess_text("# Sección\n\ntexto útil con suficiente longitud.")
     assert len(segments) == 1

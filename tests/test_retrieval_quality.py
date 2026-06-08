@@ -82,7 +82,9 @@ def test_golden_retrieval_top3(
     assert any(any(exp in fn for fn in filenames) for exp in expected_files), (
         f"Ningún archivo esperado en top-3. Got: {filenames}"
     )
-    combined = " ".join(d.page_content.lower() for d in top3)
+    combined = " ".join(
+        (d.metadata.get("parent_content") or d.page_content).lower() for d in top3
+    )
     assert any(term.lower() in combined for term in expected_terms), (
         f"Términos esperados no encontrados en top-3: {expected_terms}"
     )

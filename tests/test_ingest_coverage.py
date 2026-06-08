@@ -23,14 +23,18 @@ def test_load_all_md_files_in_documentos() -> None:
     assert "Decreto_616_de_2006.md" in filenames
 
 
-def test_chunks_have_doc_kind_and_context_prefix() -> None:
+def test_chunks_have_doc_kind_and_parent_metadata() -> None:
     docs = load_all_documents_from_dir(settings.documents_dir)
     chunks = split_and_enrich(docs)
     assert chunks
     kinds = {c.metadata.get("doc_kind") for c in chunks}
     assert "summary" in kinds
     assert "legal_full" in kinds
-    assert chunks[0].page_content.startswith("Documento:")
+    with_parent = [c for c in chunks if c.metadata.get("parent_content")]
+    assert with_parent, "se esperaba parent_content en los chunks"
+    assert all(c.metadata.get("parent_id") for c in with_parent)
+    faq_chunks = [c for c in chunks if c.metadata.get("chunk_role") == "faq"]
+    assert faq_chunks, "se esperaban chunks FAQ individuales"
 
 
 @patch("app.rag.service.Chroma.from_documents")
