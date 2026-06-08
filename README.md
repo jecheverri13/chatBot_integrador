@@ -186,6 +186,50 @@ docker compose exec api python scripts/ingest.py
 
 El contenedor corre como usuario **non-root** (`appuser`, UID 1000). No se copia `.env` dentro de la imagen.
 
+## Despliegue en Render
+
+Render ejecuta el `Dockerfile` como **Web Service** (no usa `docker-compose.yml`). Requisitos clave:
+
+- La API escucha en la variable **`PORT`** que Render asigna automáticamente (el entrypoint `scripts/docker-entrypoint.sh` la usa).
+- El índice Chroma y el modelo MiniLM se generan **durante el build** de la imagen (disco efímero en Render).
+- Define **`GEMINI_API_KEY`** en el panel de Render (Environment → Add Environment Variable).
+
+### Opción A: Blueprint (`render.yaml`)
+
+1. Sube el repo a GitHub/GitLab.
+2. En [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint**.
+3. Conecta el repositorio; Render detectará [`render.yaml`](render.yaml).
+4. Al crear el servicio, introduce `GEMINI_API_KEY` cuando lo solicite.
+
+### Opción B: Web Service manual
+
+1. **New** → **Web Service** → conecta el repositorio.
+2. **Runtime:** Docker.
+3. **Dockerfile path:** `./Dockerfile`.
+4. **Health Check Path:** `/health`.
+5. Variables de entorno mínimas:
+
+| Variable | Valor |
+|----------|-------|
+| `GEMINI_API_KEY` | Tu API key de Google AI Studio |
+| `EMBEDDING_DEVICE` | `cpu` |
+| `MODEL_CHAT` | `gemini-2.0-flash` (opcional) |
+
+### Plan y recursos
+
+La imagen incluye PyTorch + sentence-transformers (~1–3 GB). Se recomienda plan **Starter** o superior (≥512 MB RAM; **Standard** si el arranque falla por memoria).
+
+### Reindexar tras cambiar documentos
+
+Tras modificar archivos en `Documentos/`, haz un **nuevo deploy** (rebuild de la imagen). Alternativa sin rebuild: `RUN_INGEST_ON_START=true` en Render (más lento en cada arranque).
+
+### Verificación
+
+```text
+GET https://<tu-servicio>.onrender.com/health
+GET https://<tu-servicio>.onrender.com/docs
+```
+
 ## Tests
 
 ```powershell

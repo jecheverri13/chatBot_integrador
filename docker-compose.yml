@@ -10,9 +10,11 @@ services:
       - .env
     environment:
       # Sin GPU en contenedor típico
+      PORT: "8000"
       EMBEDDING_DEVICE: ${EMBEDDING_DEVICE:-cpu}
       CHROMA_PERSIST_DIR: storage/chroma
       HF_HOME: /app/.cache/huggingface
+      RUN_INGEST_ON_START: ${RUN_INGEST_ON_START:-false}
     volumes:
       - ./storage/chroma:/app/storage/chroma
       - ./Documentos:/app/Documentos:ro

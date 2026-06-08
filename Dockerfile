@@ -1,9 +1,13 @@
 # Imagen de producción: FastAPI + RAG (Chroma + MiniLM + Gemini)
+# Compatible con Render (PORT dinámico) y docker compose local.
 FROM python:3.11-slim-bookworm
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    HF_HOME=/app/.cache/huggingface
+    HF_HOME=/app/.cache/huggingface \
+    PORT=8000 \
+    EMBEDDING_DEVICE=cpu \
+    CHROMA_PERSIST_DIR=storage/chroma
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -24,7 +28,13 @@ COPY app/ ./app/
 COPY scripts/ ./scripts/
 COPY Documentos/ ./Documentos/
 
+RUN sed -i 's/\r$//' scripts/docker-entrypoint.sh \
+    && chmod +x scripts/docker-entrypoint.sh
+
+# Índice Chroma y caché HF embebidos en la imagen (Render usa disco efímero).
+# GEMINI_API_KEY dummy solo para importar Settings durante la ingesta de build.
 RUN mkdir -p storage/chroma evaluations .cache/huggingface \
+    && GEMINI_API_KEY=build-placeholder EMBEDDING_DEVICE=cpu python scripts/ingest.py \
     && chown -R appuser:appuser /app
 
 USER appuser
@@ -32,6 +42,6 @@ USER appuser
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=180s --retries=3 \
-    CMD curl -f http://127.0.0.1:8000/health || exit 1
+    CMD sh -c 'curl -f "http://127.0.0.1:${PORT:-8000}/health" || exit 1'
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["scripts/docker-entrypoint.sh"]

@@ -1,0 +1,26 @@
+# Blueprint de Render: https://render.com/docs/blueprint-spec
+# Despliega la API como Web Service con runtime Docker.
+services:
+  - type: web
+    name: chatbot-lacteo-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MODEL_CHAT
+        value: gemini-2.0-flash
+      - key: EMBEDDING_DEVICE
+        value: cpu
+      - key: CHROMA_PERSIST_DIR
+        value: storage/chroma
+      - key: HF_HOME
+        value: /app/.cache/huggingface
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: RUN_INGEST_ON_START
+        value: "false"
