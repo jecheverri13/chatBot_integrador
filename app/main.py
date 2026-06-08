@@ -1,8 +1,10 @@
 import logging
 import logging.handlers
+import os
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from fastapi import FastAPI, HTTPException, Request
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -11,8 +13,10 @@ from slowapi.util import get_remote_address
 
 from app import cache, sessions
 from app.guardrails import is_in_scope, out_of_scope_message
-from app.rag import RagService
 from app.schemas import ChatRequest, ChatResponse, SourceRef
+
+if TYPE_CHECKING:
+    from app.rag.service import RagService
 
 
 # ─── Logging con rotación ─────────────────────────────────────────────────────
@@ -29,12 +33,13 @@ def _setup_logging() -> None:
     console.setFormatter(fmt)
     root.addHandler(console)
 
-    log_file = Path("app.log")
-    file_handler = logging.handlers.RotatingFileHandler(
-        log_file, maxBytes=10 * 1024 * 1024, backupCount=5, encoding="utf-8"
-    )
-    file_handler.setFormatter(fmt)
-    root.addHandler(file_handler)
+    if os.getenv("LOG_TO_FILE", "true").lower() not in ("0", "false", "no"):
+        log_file = Path("app.log")
+        file_handler = logging.handlers.RotatingFileHandler(
+            log_file, maxBytes=10 * 1024 * 1024, backupCount=5, encoding="utf-8"
+        )
+        file_handler.setFormatter(fmt)
+        root.addHandler(file_handler)
 
     logging.getLogger("app").setLevel(logging.INFO)
 
@@ -63,8 +68,18 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-rag_service = RagService()
+_rag_service: RagService | None = None
 logger = logging.getLogger(__name__)
+
+
+def _get_rag_service() -> RagService:
+    """Carga diferida: uvicorn abre el puerto antes de importar PyTorch/Chroma."""
+    global _rag_service
+    if _rag_service is None:
+        from app.rag import RagService
+
+        _rag_service = RagService()
+    return _rag_service
 
 
 def _as_page(value: object) -> int | None:
@@ -91,7 +106,7 @@ def ingest_documents(request: Request) -> dict:
     t0 = time.perf_counter()
     logger.info("[/ingest] Inicio de indexación…")
     try:
-        result = rag_service.build_index()
+        result = _get_rag_service().build_index()
         cache.invalidate_all()
         logger.info("[/ingest] OK en %.3fs | resultado=%s", time.perf_counter() - t0, result)
         return {"ok": True, "result": result}
@@ -144,7 +159,7 @@ def chat(request: Request, payload: ChatRequest) -> ChatResponse:
     logger.info("[/chat] Guardrail: en alcance; iniciando RAG… | session=%s", sid)
     try:
         t_rag = time.perf_counter()
-        out = rag_service.query(payload.question, history=history)
+        out = _get_rag_service().query(payload.question, history=history)
         logger.info(
             "[/chat] RAG completado en %.3fs (total: %.3fs)",
             time.perf_counter() - t_rag,

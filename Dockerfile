@@ -44,4 +44,4 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=180s --retries=3 \
     CMD sh -c 'curl -f "http://127.0.0.1:${PORT:-8000}/health" || exit 1'
 
-ENTRYPOINT ["scripts/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "scripts/docker-entrypoint.sh"]

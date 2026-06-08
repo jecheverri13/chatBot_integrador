@@ -10,4 +10,4 @@ if [ "${RUN_INGEST_ON_START:-false}" = "true" ] || [ ! -f "${CHROMA_DIR}/chroma.
 fi
 
 echo "[entrypoint] Iniciando uvicorn en 0.0.0.0:${PORT}"
-exec uvicorn app.main:app --host 0.0.0.0 --port "${PORT}"
+exec uvicorn app.main:app --host 0.0.0.0 --port "${PORT}" --log-level info

@@ -24,3 +24,5 @@ services:
         value: "1"
       - key: RUN_INGEST_ON_START
         value: "false"
+      - key: LOG_TO_FILE
+        value: "false"
